@@ -1,6 +1,7 @@
-import { Controller, Get, Post , Body } from '@nestjs/common';
+import { Controller, Get, Post , Body, UseGuards } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create.customer.dto';
+import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Controller('customer')
 export class CustomerController {
@@ -10,6 +11,7 @@ export class CustomerController {
     }
 
     @Get()
+    @UseGuards(AuthGuard)
     getCustomers(){
         return this.customerService.getAllCustomers();
     }
